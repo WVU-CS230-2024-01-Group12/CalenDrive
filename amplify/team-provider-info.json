@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-calendrive-dev-160617-authRole",
+      "UnauthRoleArn": "arn:aws:iam::992382471662:role/amplify-calendrive-dev-160617-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::992382471662:role/amplify-calendrive-dev-160617-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-calendrive-dev-160617-deployment",
+      "UnauthRoleName": "amplify-calendrive-dev-160617-unauthRole",
+      "StackName": "amplify-calendrive-dev-160617",
+      "StackId": "arn:aws:cloudformation:us-east-1:992382471662:stack/amplify-calendrive-dev-160617/37aa7c80-d67d-11ee-ad89-1243f92ab76d",
+      "AmplifyAppId": "d3gkgf3deh3q68"
+    },
+    "categories": {
+      "auth": {
+        "calendrive025a7af6": {}
+      }
+    }
+  }
+}
