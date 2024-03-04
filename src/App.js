@@ -14,7 +14,7 @@ function App({ signOut, user }) {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>You are logged in as {user.signInDetails.loginId}</p>
+        <p>You are logged in as {user.userId}</p>
         <button onClick={signOut}>Log out</button>
       </header>
     </div>
