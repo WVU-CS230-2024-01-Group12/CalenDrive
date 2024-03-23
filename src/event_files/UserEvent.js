@@ -1,6 +1,7 @@
 
 import './UserEvent.css';
 
+/*
 class UserEvent {
     constructor(name, date, time, location, poster){
         this.name = name;
@@ -21,32 +22,20 @@ class UserEvent {
 }
 
 export const event = new UserEvent("[EventTitle]", "[SampleDate]", "[SampleTime]", "[SampleLocation]", "[SamplePoster]");
+*/
 
-export function GetEvent(props){
+export function GetEvent({ev, onClick}){
   
-  let modal = false;
-
-  function toggleModal() {
-    modal = !modal;
-    if(modal){
-      document.getElementById("eventPopup").setAttribute('style', "display: flex");
-
-    }else{
-      document.getElementById("eventPopup").setAttribute('style', "display: none");
-
-    }
-  }
 
   return(
     <>
-      <button id="openEvent" className="modalButton" onClick={toggleModal}>Open Event</button>
 
       <div id="eventPopup" className="eventModal">
-      	<div className="closeEvent" onClick={toggleModal}>&times;</div>
+      	<div className="closeEvent" onClick={onClick}>&times;</div>
         <div className="eventContent">
           <div className="eventHeader">
             <h1>
-              {props.ev.name}
+              {ev.title}
             </h1>
           </div>
           <div className="eventBody">

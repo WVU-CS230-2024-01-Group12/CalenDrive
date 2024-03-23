@@ -1,6 +1,8 @@
 import './App.css';
 import React from 'react';
 import InteractiveCalendar from './InteractiveCalendar.js';
+import {GetEvent, event} from './event_files/UserEvent.js'
+
 function App() {
   return (
     <div className="App">

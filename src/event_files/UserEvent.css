@@ -6,7 +6,7 @@
 .eventModal {
     position: fixed;
     display: none; /* Hidden by default */
-    z-index: 1; /* Sit on top */
+    z-index: 500; /* Sit on top */
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
@@ -32,10 +32,14 @@
     flex: 1;
 }
 
-.eventHeader {
+.eventHeader{
     background-color: #aaaaaa;
     padding: 2%; 
-    height: 5vw;
+    height: 10vh; 
+}
+
+.eventHeader h1{
+    font-size: 5vh !important;
 }
 
 .closeEvent {
