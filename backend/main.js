@@ -19,7 +19,7 @@ const authorizeUrl = oAuthClient.generateAuthUrl({
 // Setup CORS settings
 app.use(cors());
 
-// Visiting /authenticate_user will redirect you to google's OAuth2 page
+// Visiting /authenticate_url will redirect you to google's OAuth2 page
 app.get("/authenticate_url", (req, res) => {
     res.redirect(authorizeUrl);
 });
