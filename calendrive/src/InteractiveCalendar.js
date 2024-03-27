@@ -4,6 +4,7 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './InteractiveCalendar.css';
+import {GetEvent} from './event_files/UserEvent.js';
 
 const localizer = momentLocalizer(moment);
 
@@ -35,8 +36,30 @@ const InteractiveCalendar = () => {
     });
   };
 
+
+  const [currentEvent, setCurrentEvent] = useState({
+    title: '',
+    start: new Date(),
+    end: new Date(),
+  });
+
+  const [modal, setModal] = useState(false);
+
+  const handleEventClick = event => {
+    setModal(!modal)
+    if(modal){
+      setCurrentEvent(event);
+      document.getElementById("eventPopup").setAttribute('style', "display: flex");
+    }else{
+      document.getElementById("eventPopup").setAttribute('style', "display: none");
+      
+    }
+  }
+
+
   return (
     <div className="full-screen-calendar">
+
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-8">
@@ -45,6 +68,7 @@ const InteractiveCalendar = () => {
               events={events}
               startAccessor="start"
               endAccessor="end"
+              onSelectEvent={handleEventClick}
               style={{ height: '100vh' }}
             />
           </div>
@@ -95,7 +119,9 @@ const InteractiveCalendar = () => {
             </div>
           </div>
         </div>
+        <GetEvent onClick={handleEventClick} ev={currentEvent}/>
       </div>
+
     </div>
   );
 };
