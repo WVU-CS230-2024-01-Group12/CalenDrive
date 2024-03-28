@@ -1,103 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './InteractiveCalendar.css';
+import axios from 'axios';
 
 const localizer = momentLocalizer(moment);
 
 const InteractiveCalendar = () => {
-  const [events, setEvents] = useState([
-    {
-      title: 'Meeting 1',
-      start: new Date(2024, 2, 4, 10, 0),
-      end: new Date(2024, 2, 4, 11, 0),
-    },
-  
-  ]);
+    const [events, setEvents] = useState([]);
 
-  const [newEvent, setNewEvent] = useState({
-    title: '',
-    start: new Date(),
-    end: new Date(),
-  });
+    useEffect(() => {
+        fetchEvents();
+    }, []);
 
-  const handleAddEvent = () => {
-    setEvents([...events, newEvent]);
-    setNewEvent({ title: '', start: new Date(), end: new Date() });
-  };
+    const fetchEvents = async () => {
+        try {
+            const response = await axios.get('http://localhost:8800/events');
+            setEvents(response.data.map(event => ({
+                id: event.id,
+                title: event.name,
+                start: new Date(event.start),
+                end: new Date(event.end),
+                description: event.description,
+                address: event.address
+            })));
+        } catch (error) {
+            console.error('Error fetching events:', error);
+        }
+    };
 
-  const handleInputChange = (field, value) => {
-    setNewEvent({
-      ...newEvent,
-      [field]: value,
-    });
-  };
-
-  return (
-    <div className="full-screen-calendar">
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-8">
+    return (
+        <div style={{ height: '600px' }}>
             <Calendar
-              localizer={localizer}
-              events={events}
-              startAccessor="start"
-              endAccessor="end"
-              style={{ height: '100vh' }}
+                localizer={localizer}
+                events={events}
+                startAccessor="start"
+                endAccessor="end"
+                style={{ padding: '10px' }}
             />
-          </div>
-          <div className="col-md-4">
-            <div className="mb-3">
-              <h3>Add Event</h3>
-              <form>
-                <div className="mb-3">
-                  <label htmlFor="eventTitle" className="form-label">
-                    Event Title
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="eventTitle"
-                    value={newEvent.title}
-                    onChange={(e) => handleInputChange('title', e.target.value)}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="eventStart" className="form-label">
-                    Start Time
-                  </label>
-                  <input
-                    type="datetime-local"
-                    className="form-control"
-                    id="eventStart"
-                    value={moment(newEvent.start).format('YYYY-MM-DDTHH:mm')}
-                    onChange={(e) => handleInputChange('start', new Date(e.target.value))}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="eventEnd" className="form-label">
-                    End Time
-                  </label>
-                  <input
-                    type="datetime-local"
-                    className="form-control"
-                    id="eventEnd"
-                    value={moment(newEvent.end).format('YYYY-MM-DDTHH:mm')}
-                    onChange={(e) => handleInputChange('end', new Date(e.target.value))}
-                  />
-                </div>
-                <button type="button" className="btn btn-primary" onClick={handleAddEvent}>
-                  Add Event
-                </button>
-              </form>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default InteractiveCalendar;
