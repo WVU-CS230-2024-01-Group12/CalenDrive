@@ -1,8 +1,8 @@
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { Marker, MapContainer, TileLayer, useMap } from "react-leaflet";
 import React from "react";
 import "leaflet/dist/leaflet.css";
 
-function EventLocationMap({ height, width }) {
+function Map({ height, width, longitude, latitude }) {
   function ChangeView({ center, zoom }) {
     const map = useMap();
     map.setView(center, zoom);
@@ -10,14 +10,19 @@ function EventLocationMap({ height, width }) {
   }
 
   return (
-    <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height, width }}>
-      <ChangeView center={[51.505, -0.09]} zoom={13} />
+    <MapContainer
+      center={{ longitude, latitude }}
+      zoom={13}
+      style={{ height, width }}
+    >
+      <ChangeView center={{ longitude, latitude }} zoom={13} />
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
       />
+      <Marker position={{ longitude, latitude }}></Marker>
     </MapContainer>
   );
 }
 
-export default EventLocationMap;
+export default Map;
