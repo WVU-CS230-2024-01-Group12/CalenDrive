@@ -45,7 +45,7 @@ app.post('/events', (req, res) => {
 app.put('/events/:id', (req, res) => {
     const eventId = req.params.id;
     const { name, description, address, start, end } = req.body;
-    db.query('UPDATE events SET name=?, description=?, address=?, start=?, end=? WHERE id=?', [name, description, address, start, end, eventId], (err, result) => {
+    db.query('UPDATE events SET name=?, desc=?, address=?, start=?, end=? WHERE id=?', [name, description, address, start, end, eventId], (err, result) => {
         if (err) throw err;
         res.send('Event updated');
     });
