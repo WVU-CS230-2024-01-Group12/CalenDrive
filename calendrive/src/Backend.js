@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const Backend = {};
-const BACKEND_BASE = "http://localhost:3000";
+const BACKEND_BASE = "http://localhost:8800";
 
 Backend.RedirectToAuthenticationUrl = function() {
     const authenticationUrl = new URL("/authenticate_url", BACKEND_BASE);
