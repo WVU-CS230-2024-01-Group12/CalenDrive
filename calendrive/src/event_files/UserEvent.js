@@ -1,3 +1,4 @@
+import React from 'react';
 
 import './UserEvent.css';
 
@@ -25,8 +26,6 @@ export const event = new UserEvent("[EventTitle]", "[SampleDate]", "[SampleTime]
 */
 
 export function GetEvent({ev, onClick}){
-  
-
   return(
     <>
 
@@ -39,10 +38,16 @@ export function GetEvent({ev, onClick}){
             </h1>
           </div>
           <div className="eventBody">
-            Some Content...
+            <h3> {ev.address}</h3>
+            <p> {ev.description}</p>
+            <p> {new Date(ev.start).toLocaleString()} - {new Date(ev.end).toLocaleString()} </p>
+
+            
           </div>
 					<div className="buttons">
             <button id="rsvpButton" className="rsvp">RSVP</button>
+            <button id="editButton" className="edit">Edit</button>
+            <button id="deleteButton" className="delete">Delete</button>  
           </div>
         </div>
 
