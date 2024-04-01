@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios';
 import './UserEvent.css';
 
 /*
@@ -26,6 +26,20 @@ export const event = new UserEvent("[EventTitle]", "[SampleDate]", "[SampleTime]
 */
 
 export function GetEvent({ev, onClick}){
+
+const handleDelete = async (id) => {
+try {
+  await axios.delete("http://localhost:8800/events/"+id)
+  window.location.reload()
+} catch (err) {
+ console.log(err)
+}
+
+
+
+
+}
+ 
   return(
     <>
 
@@ -47,7 +61,7 @@ export function GetEvent({ev, onClick}){
 					<div className="buttons">
             <button id="rsvpButton" className="rsvp">RSVP</button>
             <button id="editButton" className="edit">Edit</button>
-            <button id="deleteButton" className="delete">Delete</button>  
+            <button id="deleteButton" className="delete" onClick={()=>handleDelete(ev.id)}>Delete</button>  
           </div>
         </div>
 
