@@ -33,6 +33,11 @@ db.connect(err => {
 // Setup CORS settings
 app.use(cors());
 
+// Visiting /authenticate_url will redirect you to google's OAuth2 page
+app.get("/authenticate_url", (req, res) => {
+    res.redirect(authorizeUrl);
+});
+
 // The browser gives us the user's authorization code here
 app.put("/oauth2callback/:code", (req, res) => {
     const code = req.params.code;
