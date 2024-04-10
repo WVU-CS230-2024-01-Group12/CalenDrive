@@ -80,6 +80,7 @@ const InteractiveCalendar = () => {
           <GetEvent ev={selectedEvent} onClick={handleEventClick} />
           <AddEvent onClick={handleAddEventClick}/>
         </div>
+        </>
     );
 };
 
