@@ -85,7 +85,7 @@ app.post('/events', (req, res) => {
     const q = "INSERT INTO events (`name`, `desc`, `address`, `start`, `end`) VALUES (?)";
     db.query(q, [values], (err, data) => {
         if (err) return res.json(err);
-        return res.json("Event added");
+        return res.json(data);
     });
     
 });
@@ -93,10 +93,11 @@ app.post('/events', (req, res) => {
 // Update event
 app.put('/events/:id', (req, res) => {
     const eventId = req.params.id;
-    const { name, description, address, start, end } = req.body;
-    db.query('UPDATE events SET name=?, desc=?, address=?, start=?, end=? WHERE id=?', [name, description, address, start, end, eventId], (err, result) => {
-        if (err) throw err;
-        res.send('Event updated');
+    const values = [req.body.name, req.body.desc, req.body.address, req.body.start, req.body.end];
+    const q = "UPDATE events SET `name` =?, `desc` =?, `address` =?, `start` =?, `end` =? WHERE id=?"
+    db.query(q, [...values, eventId], (err, result) => {
+        if (err) return res.json(err);
+        return res.json('Event updated');
     });
 });
 
@@ -105,7 +106,7 @@ app.delete('/events/:id', (req, res) => {
     const eventId = req.params.id;
     db.query('DELETE FROM events WHERE id=?', [eventId], (err, result) => {
         if (err) throw err;
-        res.send('Event deleted');
+        res.json('Event deleted');
     });
 });
 
