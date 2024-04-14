@@ -29,7 +29,7 @@ function OAuth2Callback() {
 
     return (
         <div>
-
+            <h2 text-align="center">Logging in...</h2>
         </div>
     );
 }
