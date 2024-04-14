@@ -1,0 +1,33 @@
+.bar-container {
+    height: 8vw;
+    padding-left: 20px;
+    padding-right: 20px;
+    align-content: center;
+    justify-self: flex-end !important;
+}
+
+.addressbar {
+    width: 30vw;
+    height: 4.5vh;
+}
+
+.suggestions {
+    position: absolute;
+    z-index: 99;
+    width: 30vw;
+    background-color: white;
+    color: grey;
+    list-style-type: none;
+    text-align: left;
+    border: 1px solid black;
+    border-top: none;
+    padding: 0;
+}
+
+.suggestion {
+    padding: 1%
+}
+.suggestion:hover {
+    background-color: lightgrey;
+    color: black;
+}
