@@ -1,15 +1,9 @@
 .navbar {
-    display: flex;
-    size: 30px;
     color: white;
     background-color: gray;
     flex-direction: row;
     justify-content: flex-start !important;
-    top: 0;
-    width: 100vw;
-    text-decoration: none !important;
-    padding: 0 !important;
-    align-items: flex-end !important;
+    width: 100%;
 }
 
 .navigate {
