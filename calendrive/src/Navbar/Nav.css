@@ -23,3 +23,13 @@
     background-color: rgb(163, 163, 163);
     color: black;
 }
+
+.dropdown {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 0px;
+    border: none;
+}
+
+
