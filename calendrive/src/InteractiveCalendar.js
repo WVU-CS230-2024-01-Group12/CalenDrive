@@ -5,8 +5,6 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import axios from 'axios';
 import { GetEvent } from './event_files/UserEvent.js';
 import './event_files/UserEvent.css';
-import { Link } from 'react-router-dom';
-import Nav from './Navbar/Nav.js'
 import './event_files/AddEvent.css';
 import { AddEvent } from './event_files/AddEvent.js';
 import './InteractiveCalendar.css';
@@ -68,23 +66,20 @@ const InteractiveCalendar = () => {
     }
 
     return (
-        <>
-        <Nav />
-        <div style={{ height: '600px' }}>
-            <Calendar
-                localizer={localizer}
-                events={events}
-                startAccessor="start"
-                endAccessor="end"
-                onSelectEvent={handleEventClick}
-                style={{ padding: '10px' }}
-            />
-                <GetEvent ev={selectedEvent} onClick={handleEventClick} />
-                <button id="AddEventButton" onClick={handleAddEventClick}>Add Event</button>
-                <AddEvent onClick={handleAddEventClick}/>
-                
+        <div className='full-screen-calendar'>
+          <button id="AddEventButton" onClick={handleAddEventClick}>Add Event</button>
+          <Calendar
+              localizer={localizer}
+              events={events}
+              startAccessor="start"
+              endAccessor="end"
+              onSelectEvent={handleEventClick}
+              style={{ padding: '10px' }}
+          />
+          
+          <GetEvent ev={selectedEvent} onClick={handleEventClick} />
+          <AddEvent onClick={handleAddEventClick}/>
         </div>
-        </>
     );
 };
 

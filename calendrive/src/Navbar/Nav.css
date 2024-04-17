@@ -6,7 +6,6 @@
     flex-direction: row;
     justify-content: flex-start !important;
     top: 0;
-    height: 8vw;
     width: 100vw;
     text-decoration: none !important;
     padding: 0 !important;
@@ -14,7 +13,6 @@
 }
 
 .navigate {
-    height: 8vw;
     padding-left: 20px;
     padding-right: 20px;
     align-content: center;

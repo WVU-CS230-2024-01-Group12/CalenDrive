@@ -11,9 +11,10 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Nav />
         <Routes>
-          <Route path = "/" element = {<MainPage />}/>
-          <Route path = "/edit-event" element = {<EditEvent />}/>
+          <Route path="/" element = {<MainPage />}/>
+          <Route path="/edit-event" element = {<EditEvent />}/>
           <Route path="/oauth2callback" element={<OAuth2Callback />} />
         </Routes>
       </BrowserRouter>
