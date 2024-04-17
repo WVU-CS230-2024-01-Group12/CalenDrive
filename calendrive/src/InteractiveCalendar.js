@@ -7,6 +7,9 @@ import { GetEvent } from './event_files/UserEvent.js';
 import './event_files/UserEvent.css';
 import { Link } from 'react-router-dom';
 import Nav from './Navbar/Nav.js'
+import './event_files/AddEvent.css';
+import { AddEvent } from './event_files/AddEvent.js';
+import './InteractiveCalendar.css';
 
 const localizer = momentLocalizer(moment);
 
@@ -26,7 +29,7 @@ const InteractiveCalendar = () => {
     const fetchEvents = async () => {
         try {
             const response = await axios.get('http://localhost:8800/events');
-            // Assuming the response.data is an array of event objects
+
             const formattedEvents = response.data.map(event => ({
                 id: event.id,
                 title: event.name,
@@ -54,6 +57,15 @@ const InteractiveCalendar = () => {
         
       }
     }
+    const handleAddEventClick = () => {
+      setModal(!modal)
+      if(modal){
+        document.getElementById("addeventPopup").setAttribute('style', "display: flex");
+      }else{
+        document.getElementById("addeventPopup").setAttribute('style', "display: none");
+        
+      }
+    }
 
     return (
         <>
@@ -68,7 +80,9 @@ const InteractiveCalendar = () => {
                 style={{ padding: '10px' }}
             />
                 <GetEvent ev={selectedEvent} onClick={handleEventClick} />
-          
+                <button id="AddEventButton" onClick={handleAddEventClick}>Add Event</button>
+                <AddEvent onClick={handleAddEventClick}/>
+                
         </div>
         </>
     );
