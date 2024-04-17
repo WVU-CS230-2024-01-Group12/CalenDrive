@@ -66,20 +66,19 @@ const InteractiveCalendar = () => {
     }
 
     return (
-        <div style={{ height: '600px' }}>
-            <Calendar
-                localizer={localizer}
-                events={events}
-                startAccessor="start"
-                endAccessor="end"
-                onSelectEvent={handleEventClick}
-                style={{ padding: '10px' }}
-            />
-           
-                <GetEvent ev={selectedEvent} onClick={handleEventClick} />
-                <button id="AddEventButton" onClick={handleAddEventClick}>Add Event</button>
-                <AddEvent onClick={handleAddEventClick}/>
-                
+        <div className='full-screen-calendar'>
+          <button id="AddEventButton" onClick={handleAddEventClick}>Add Event</button>
+          <Calendar
+              localizer={localizer}
+              events={events}
+              startAccessor="start"
+              endAccessor="end"
+              onSelectEvent={handleEventClick}
+              style={{ padding: '10px' }}
+          />
+          
+          <GetEvent ev={selectedEvent} onClick={handleEventClick} />
+          <AddEvent onClick={handleAddEventClick}/>
         </div>
     );
 };
