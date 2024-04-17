@@ -1,6 +1,9 @@
+import Nav from '../Navbar/Nav.js'
+
 function EditEvent() {
     return (
         <div>
+            <Nav/>
             <h1>Event Editor</h1>
             <div style={{display:'flex', flexDirection: 'column', width: "30vw", alignItems: 'center'}}>
                 <input type = "text" placeholder = "Event Name" name = "title"></input>

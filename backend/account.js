@@ -50,7 +50,7 @@ account.setup = function(app) {
                 if (err)
                     next(err);
 
-                res.json({ result: "Success", session: req.session });
+                res.json({ result: "Success" });
             });
         }).catch(reason => {
             // An error occurred while getting the tokens
