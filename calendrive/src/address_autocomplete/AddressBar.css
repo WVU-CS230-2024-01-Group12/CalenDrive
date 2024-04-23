@@ -1,7 +1,4 @@
 .bar-container {
-    height: 8vw;
-    padding-left: 20px;
-    padding-right: 20px;
     align-content: center;
 }
 
@@ -12,7 +9,6 @@
 
 .suggestions {
     position: absolute;
-    z-index: 99;
     background-color: white;
     color: grey;
     list-style-type: none;

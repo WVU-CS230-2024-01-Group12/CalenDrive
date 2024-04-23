@@ -3,6 +3,7 @@ import axios from 'axios';
 import './AddEvent.css';
 import { useState } from 'react';
 import './UpdateEvent.css';
+import AddressBar from '../address_autocomplete/AddressBar';
 
 export function UpdateEvent({onClick, ev}){
 
@@ -43,7 +44,7 @@ return(err)
           <div className="eventBody">
            <div className="form">
             <input type="text" id="name" name="name" placeholder="Event Name" onChange={handleChange} required/>
-            <input type="text" id="address" name="address" placeholder="Event Location" onChange={handleChange} required/>    
+            <AddressBar onTest = {(val) => setevent(val) }/>     
             <input type="text" id="desc" name="desc" placeholder="Event Description" onChange={handleChange}/>
             <input type="datetime-local" id="start" name="start" onChange={handleChange} required/>
             <input type="datetime-local" id="end" name="end" onChange={handleChange} required/>

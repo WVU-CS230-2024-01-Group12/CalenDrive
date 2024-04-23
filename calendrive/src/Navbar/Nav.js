@@ -14,7 +14,6 @@ function Nav() {
     return (
         <div className="navbar" style={{ backgroundColor: backgroundColor }}>
             <StyledLink to="/"><div className="navigate"><img src="calendriveLogo.png" alt="Calendrive logo"/></div></StyledLink>
-            <StyledLink to="/edit-event"><div className="navigate">Edit Events</div></StyledLink>
             <StyledLink to="/"><div className="navigate">Profile</div></StyledLink>
             <UserLogin />
         
