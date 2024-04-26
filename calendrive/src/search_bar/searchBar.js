@@ -28,8 +28,6 @@ const SearchBar = (props) => {
     }
   };
 
-  const containsObject = (ev) => suggestions.some(event => event.id === ev.id);
-
   function filterTypeSelect(e) {
     setFilterBy(e.target.outerText);
   }
