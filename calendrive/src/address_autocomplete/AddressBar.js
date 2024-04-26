@@ -15,6 +15,7 @@ const AddressBar = (props) => {
           `https://api.geoapify.com/v1/geocode/autocomplete?text=${value}&apiKey=4251848903d64182ba6a936c45db60f0`,
           { withCredentials: false }
         );
+        console.log(response.data.features);
         setSuggestions(response.data.features);
       } catch (error) {
         console.error('Error fetching suggestions:', error);
