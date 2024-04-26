@@ -2,6 +2,7 @@ import "./searchBar.css";
 import axios from "axios";
 import { useState } from "react";
 
+
 const SearchBar = (props) => {
   const [events, setEvents] = useState([]);
   const [filterBy, setFilterBy] = useState("Name");
@@ -33,14 +34,20 @@ const SearchBar = (props) => {
   }
 
   const handleClick = (e) => {
-    fetchEvents();
     setSuggestions([]);
-  }
+  };
 
-  const eventSelect = (e) => {
-    console.log(e);
-    setInputValue(e.title);
-  }
+  const eventSelect = (eventId) => {
+    const selectedEvent = events.find((event) => event.id === eventId);
+    if (selectedEvent) {
+      const eventInfo = `Title: ${selectedEvent.title}\nDescription: ${selectedEvent.description}\nAddress: ${selectedEvent.address}\nStart: ${selectedEvent.start.toString()}\nEnd: ${selectedEvent.end.toString()}`;
+      window.alert(eventInfo);
+    } else {
+      // If event is not found, refetch events to ensure we have the latest data
+      fetchEvents();
+    }
+  };
+  
 
   const handleChange = (e) => {
     const val = e.target.value;
@@ -54,17 +61,17 @@ const SearchBar = (props) => {
           }
           
         }
-    }
-  );
+    });
   }
 
   return (
     <div>
+
       <form className="searchContainer">
         <input className="searchBar" value={inputValue} type="text" placeholder={filterBy + "..."} onClick={handleClick} onChange={(e) => handleChange(e)}></input>
         <ul className="evsuggestions">
           {suggestions.map((suggestion) => (
-            <li id={suggestion.id} className="suggestion" onClick={() => eventSelect(suggestion)}>{suggestion.title}</li>
+            <li key={suggestion.id} className="suggestion" onClick={() => eventSelect(suggestion.id)}> {suggestion.title} </li>
           ))}
         </ul>
 
@@ -77,7 +84,10 @@ const SearchBar = (props) => {
             <li onClick={(e) => filterTypeSelect(e)}>Time</li>
           </ul>
         </button>
+
       </form>
+
+
     </div>
   );
 };
