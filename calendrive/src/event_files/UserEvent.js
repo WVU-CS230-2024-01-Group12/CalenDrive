@@ -4,10 +4,7 @@ import './UserEvent.css';
 import { useState } from 'react';
 import { UpdateEvent } from './UpdateEvent';
 
-
-
-
-export function GetEvent({ev, onClick}){
+export function GetEvent({ev, onClick, currentUser}){
 
 const handleDelete = async (id) => {
 try {
@@ -46,9 +43,9 @@ const handleEditClick = () => {
           </div>
 					<div className="buttons">
             <button id="rsvpButton" className="rsvp">RSVP</button>
-            <button id="editButton" className="edit" onClick={handleEditClick}>Edit</button>
-          <UpdateEvent onClick={handleEditClick} ev={ev}/>
-            <button id="deleteButton" className="delete" onClick={()=>handleDelete(ev.id)}>Delete</button>  
+            {ev.poster === currentUser.name && <button id="editButton" className="edit" onClick={handleEditClick}>Edit</button>}
+            {ev.poster === currentUser.name && <UpdateEvent onClick={handleEditClick} ev={ev}/>}
+            {ev.poster === currentUser.name && <button id="deleteButton" className="delete" onClick={()=>handleDelete(ev.id)}>Delete</button>}
           </div>
         </div>
 
