@@ -52,6 +52,11 @@ const InteractiveCalendar = () => {
     const [modal, setModal] = useState(false);
 
     const handleEventClick = event => {
+      Backend.GetAccountInfo().then(result => {
+        if(result != null){
+          setUser(result);
+        }
+      })
       setModal(!modal)
       if(modal){
         setSelectedEvent(event);
@@ -61,6 +66,7 @@ const InteractiveCalendar = () => {
         
       }
     }
+    
     const handleAddEventClick = () => {
       Backend.GetAccountInfo().then(result => {
         if(result != null){

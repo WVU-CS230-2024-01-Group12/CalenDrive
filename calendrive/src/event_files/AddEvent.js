@@ -19,13 +19,12 @@ export function AddEvent({ currentUser, onClick }) {
 
   const handleChange = (e) => {
     setEvent((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setEvent((prev) => ({...prev, poster: currentUser.name}))
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setEvent((prev) => ({...prev, poster : currentUser.name}))
     try {
       await axios.post("http://localhost:8800/events", event);
-      window.location.reload();
     } catch (err) {
       return err;
     }
