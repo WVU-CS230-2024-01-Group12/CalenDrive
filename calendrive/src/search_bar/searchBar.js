@@ -24,6 +24,7 @@ const SearchBar = (props) => {
         end: new Date(event.end),
       }));
       setEvents(formattedEvents);
+      console.log(formattedEvents);
     } catch (error) {
       console.error("Error fetching events:", error);
     }
@@ -34,6 +35,7 @@ const SearchBar = (props) => {
   }
 
   const handleClick = (e) => {
+    fetchEvents();
     setSuggestions([]);
   };
 
