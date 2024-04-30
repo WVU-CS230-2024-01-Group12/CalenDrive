@@ -85,7 +85,7 @@ const InteractiveCalendar = () => {
         style={{ padding: "10px" }}
       />
 
-      <GetEvent ev={selectedEvent} onClick={handleEventClick} />
+      <GetEvent ev={selectedEvent} onClick={handleEventClick} showing={modal}/>
       <AddEvent onClick={handleAddEventClick} />
     </div>
   );

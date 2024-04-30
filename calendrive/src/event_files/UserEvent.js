@@ -5,7 +5,7 @@ import { useState } from "react";
 import { UpdateEvent } from "./UpdateEvent";
 import Map from "../Pages/Map";
 
-export function GetEvent({ ev, onClick }) {
+export function GetEvent({ ev, onClick, showing }) {
   const handleDelete = async (id) => {
     try {
       await axios.delete("http://localhost:8800/events/" + id);
@@ -47,12 +47,12 @@ export function GetEvent({ ev, onClick }) {
               {new Date(ev.start).toLocaleString()} -{" "}
               {new Date(ev.end).toLocaleString()}{" "}
               <div height="300px">
-                <Map
+                {!showing && <Map
                   height={"400px"}
                   width={"400px"}
                   lat={ev.lat}
                   lon={ev.lon}
-                />{" "}
+                />}{" "}
               </div>
             </p>
           </div>
