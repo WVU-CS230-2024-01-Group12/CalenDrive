@@ -2,6 +2,7 @@ import "./Nav.css"
 import React, { useState } from 'react';
 import StyledLink from "./StyledLink";
 import UserLogin from "../UserLogin"
+import SearchBar from "../search_bar/searchBar.js"
 
 function Nav() {
     const [backgroundColor, setBackgroundColor] = useState(""); 
@@ -30,6 +31,7 @@ function Nav() {
                     </select>
                 </button>
             </div>
+            <SearchBar style={{marginLeft: "auto"}} />
         </div>
     );
 }

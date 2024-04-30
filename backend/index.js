@@ -38,8 +38,6 @@ app.get('/events', (req, res) => {
 
 // Add new event
 app.post('/events', (req, res) => {
-    const values = [req.body.name, req.body.desc, req.body.address, req.body.lat, req.body.lon, req.body.start, req.body.end, req.body.poster];
-    const q = "INSERT INTO events (`name`, `desc`, `address`, `lat`, `lon`, `start`, `end`, `poster`) VALUES (?)";
     db.query(q, [values], (err, data) => {
         if (err) return res.json(err);
         return res.json(data);
