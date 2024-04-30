@@ -12,7 +12,7 @@ const oAuthClient = new OAuth2Client(
 
 const authorizeUrl = oAuthClient.generateAuthUrl({
     access_type: "online",
-    scope: "https://www.googleapis.com/auth/userinfo.profile"
+    scope: ["https://www.googleapis.com/auth/userinfo.profile", "email"]
 });
 
 // Middleware that fails any request requiring being logged in if the session is not logged in
@@ -50,7 +50,7 @@ account.setup = function(app) {
                 if (err)
                     next(err);
 
-                res.json({ result: "Success", session: req.session });
+                res.json({ result: "Success" });
             });
         }).catch(reason => {
             // An error occurred while getting the tokens
@@ -74,19 +74,23 @@ account.setup = function(app) {
     });
 
     // Returns information about the account associated with the session
-    // Currently just contains "name"
+    // Currently just contains "name" and "email"
     app.get("/account_info", requireLogin, (req, res) => {
         oAuthClient.setCredentials(req.session.oAuthTokens);
 
-        const url = "https://people.googleapis.com/v1/people/me?personFields=names";
+        const url = "https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses";
         oAuthClient.request({url}).then(async peopleRes => {
-            res.json({ result: "Success", name: peopleRes.data.names[0].displayName});
+            res.json({
+                result: "Success",
+                name: peopleRes.data.names[0].displayName,
+                email: peopleRes.data.emailAddresses[0].value
+            });
         }).catch(reason => {
             res.json({ result: "Failed" });
 
             console.log("Error getting account info:");
             console.log(reason);
-        })
+        });
     });
 };
 

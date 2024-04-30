@@ -15,17 +15,7 @@ function OAuth2Callback() {
         return;
     }
     
-    backend.OAuth2Callback(authCode).then(result => {
-        const successResult = result.data.result;
-
-        if (successResult !== "Success") {
-            console.log(successResult);
-            alert("Failed to login");
-        }
-
-        // Back to the main page
-        navigate("/");
-    });
+    backend.OAuth2Callback(authCode, navigate);
 
     return (
         <div>
