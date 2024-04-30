@@ -50,41 +50,46 @@ const InteractiveCalendar = () => {
     };
 
     const [modal, setModal] = useState(false);
+    const [addEventModal, setAddEventModal] = useState(false);
 
-    const handleEventClick = event => {
-      Backend.GetAccountInfo().then(result => {
-        if(result != null){
-          setUser(result);
-        }
-      })
-      setModal(!modal)
+    useEffect(() => {
       if(modal){
-        setSelectedEvent(event);
         document.getElementById("eventPopup").setAttribute('style', "display: flex");
       }else{
         document.getElementById("eventPopup").setAttribute('style', "display: none");
         
       }
+    }, [modal]);
+
+    useEffect(() => {
+      if(addEventModal){
+        document.getElementById("addeventPopup").setAttribute('style', "display: flex");
+      }else{
+        document.getElementById("addeventPopup").setAttribute('style', "display: none");
+        
+      }
+    }, [addEventModal]);
+
+    const handleEventClick = event => {
+      const accountInfo = Backend.GetAccountInfo();
+
+      if(accountInfo != null){
+        setUser(accountInfo);
+      }
+
+      setModal(!modal)
+      setSelectedEvent(event);
     }
     
     const handleAddEventClick = () => {
-      Backend.GetAccountInfo().then(result => {
-        if(result != null){
-          setUser(result);
-          setModal(!modal);
-          if(modal){
-            document.getElementById("addeventPopup").setAttribute('style', "display: flex");
-          }else{
-            document.getElementById("addeventPopup").setAttribute('style', "display: none");
-          }
-        }else{
-          window.alert("please sign in before trying to add an event")
-        }
-      }).catch(error => {
-        console.error(error);
-      });
-      
-      
+      const accountInfo = Backend.GetAccountInfo();
+
+      if(accountInfo != null){
+        setUser(accountInfo);
+        setAddEventModal(!addEventModal);
+      }else{
+        window.alert("please sign in before trying to add an event")
+      }
     }
 
     return (
