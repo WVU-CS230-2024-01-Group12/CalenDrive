@@ -8,17 +8,21 @@ import './event_files/UserEvent.css';
 import './event_files/AddEvent.css';
 import { AddEvent } from './event_files/AddEvent.js';
 import './InteractiveCalendar.css';
+import Backend from './Backend.js';
 
 const localizer = momentLocalizer(moment);
 
 const InteractiveCalendar = () => {
+
+    const [user, setUser] = useState({
+      name: ''
+    })
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState({
       title: '',
       start: new Date(),
       end: new Date(),
     });
-   
 
     useEffect(() => {
         fetchEvents();
@@ -33,9 +37,11 @@ const InteractiveCalendar = () => {
                 title: event.name,
                 description: event.desc,
                 address: event.address,
+                lat: event.lat,
+                lon: event.lon,
                 start: new Date(event.start),
-                end: new Date(event.end)
-                
+                end: new Date(event.end),
+                poster: event.poster
             }));
             setEvents(formattedEvents);
         } catch (error) {
@@ -46,6 +52,11 @@ const InteractiveCalendar = () => {
     const [modal, setModal] = useState(false);
 
     const handleEventClick = event => {
+      Backend.GetAccountInfo().then(result => {
+        if(result != null){
+          setUser(result);
+        }
+      })
       setModal(!modal)
       if(modal){
         setSelectedEvent(event);
@@ -55,14 +66,25 @@ const InteractiveCalendar = () => {
         
       }
     }
+    
     const handleAddEventClick = () => {
-      setModal(!modal)
-      if(modal){
-        document.getElementById("addeventPopup").setAttribute('style', "display: flex");
-      }else{
-        document.getElementById("addeventPopup").setAttribute('style', "display: none");
-        
-      }
+      Backend.GetAccountInfo().then(result => {
+        if(result != null){
+          setUser(result);
+          setModal(!modal);
+          if(modal){
+            document.getElementById("addeventPopup").setAttribute('style', "display: flex");
+          }else{
+            document.getElementById("addeventPopup").setAttribute('style', "display: none");
+          }
+        }else{
+          window.alert("please sign in before trying to add an event")
+        }
+      }).catch(error => {
+        console.error(error);
+      });
+      
+      
     }
 
     return (
@@ -77,8 +99,8 @@ const InteractiveCalendar = () => {
               style={{ padding: '10px' }}
           />
           
-          <GetEvent ev={selectedEvent} onClick={handleEventClick} />
-          <AddEvent onClick={handleAddEventClick}/>
+          <GetEvent ev={selectedEvent} currentUser={user} onClick={handleEventClick} />
+          <AddEvent currentUser={user} onClick={handleAddEventClick}/>
         </div>
     );
 };

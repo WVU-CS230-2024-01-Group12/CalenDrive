@@ -7,7 +7,7 @@ import account from './account.js'
 const app = express();
 
 const db = mysql.createConnection({
-    host: 'localhost',
+    host: 'database-3.c12ew6m4ku0j.us-east-2.rds.amazonaws.com',
     user: 'root',
     password: 'password',
     database: 'calendrive'
@@ -38,8 +38,8 @@ app.get('/events', (req, res) => {
 
 // Add new event
 app.post('/events', (req, res) => {
-    const values = [req.body.name, req.body.desc, req.body.address, req.body.start, req.body.end];
-    const q = "INSERT INTO events (`name`, `desc`, `address`, `start`, `end`) VALUES (?)";
+    const values = [req.body.name, req.body.desc, req.body.address, req.body.lat, req.body.lon, req.body.start, req.body.end, req.body.poster];
+    const q = "INSERT INTO events (`name`, `desc`, `address`, `lat`, `lon`, `start`, `end`, `poster`) VALUES (?)";
     db.query(q, [values], (err, data) => {
         if (err) return res.json(err);
         return res.json(data);
@@ -49,8 +49,8 @@ app.post('/events', (req, res) => {
 // Update event
 app.put('/events/:id', (req, res) => {
     const eventId = req.params.id;
-    const values = [req.body.name, req.body.desc, req.body.address, req.body.start, req.body.end];
-    const q = "UPDATE events SET `name` =?, `desc` =?, `address` =?, `start` =?, `end` =? WHERE id=?"
+    const values = [req.body.name, req.body.desc, req.body.address, req.body.lat, req.body.lon, req.body.start, req.body.end, req.body.poster];
+    const q = "UPDATE events SET `name` =?, `desc` =?, `address` =?, `lat` =?, `lon` =?, `start` =?, `end` =?, `poster` =?, WHERE id=?"
     db.query(q, [...values, eventId], (err, result) => {
         if (err) return res.json(err);
         return res.json('Event updated');
