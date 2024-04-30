@@ -1,11 +1,7 @@
-import React from 'react';
 import axios from 'axios';
 import './UserEvent.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { UpdateEvent } from './UpdateEvent';
-
-
-
 
 export function GetEvent({ev, onClick}){
 
@@ -19,13 +15,16 @@ try {
 
 const [modal, setModal] = useState(false);
 
-const handleEditClick = () => {
-  setModal(!modal);
+useEffect(() => {
   if (modal) {
     document.getElementById("editeventPopup").setAttribute('style', "display: flex");
   } else {
     document.getElementById("editeventPopup").setAttribute('style', "display: none");
   }
+}, [modal]);
+
+const handleEditClick = () => {
+  setModal(!modal);
 };
  
   return(

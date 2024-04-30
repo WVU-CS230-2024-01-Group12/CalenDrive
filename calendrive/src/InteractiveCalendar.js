@@ -45,24 +45,21 @@ const InteractiveCalendar = () => {
 
     const [modal, setModal] = useState(false);
 
-    const handleEventClick = event => {
-      setModal(!modal)
-      if(modal){
-        setSelectedEvent(event);
-        document.getElementById("eventPopup").setAttribute('style', "display: flex");
-      }else{
-        document.getElementById("eventPopup").setAttribute('style', "display: none");
-        
-      }
-    }
-    const handleAddEventClick = () => {
-      setModal(!modal)
+    useEffect(() => {
       if(modal){
         document.getElementById("addeventPopup").setAttribute('style', "display: flex");
       }else{
         document.getElementById("addeventPopup").setAttribute('style', "display: none");
-        
       }
+    }, [modal]);
+
+    const handleEventClick = event => {
+      setModal(!modal);
+      setSelectedEvent(event);
+    }
+    
+    const handleAddEventClick = () => {
+      setModal(!modal);
     }
 
     return (
