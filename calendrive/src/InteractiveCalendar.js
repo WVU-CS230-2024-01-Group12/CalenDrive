@@ -24,12 +24,12 @@ const InteractiveCalendar = () => {
       end: new Date(),
     });
 
-    useEffect(() => {
-        fetchEvents();
-    }, []);
+  useEffect(() => {
+    fetchEvents();
+  }, []);
 
-    const fetchEvents = async () => {
-        try {
+  const fetchEvents = async () => {
+    try {
             const response = await axios.get('http://localhost:8800/events');
 
             const formattedEvents = response.data.map(event => ({
@@ -105,8 +105,8 @@ const InteractiveCalendar = () => {
               style={{ padding: '10px' }}
           />
           
-          <GetEvent ev={selectedEvent} currentUser={user} onClick={handleEventClick} />
-          <AddEvent currentUser={user} onClick={handleAddEventClick}/>
+          <GetEvent ev={selectedEvent} currentUser={user} onClick={handleEventClick} showing={modal}/>
+          <AddEvent onClick={handleAddEventClick}/>
         </div>
     );
 };

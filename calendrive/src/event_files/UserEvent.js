@@ -2,8 +2,9 @@ import axios from 'axios';
 import './UserEvent.css';
 import { useState, useEffect } from 'react';
 import { UpdateEvent } from './UpdateEvent';
+import Map from '../Pages/Map';
 
-export function GetEvent({ev, onClick, currentUser}){
+export function GetEvent({ev, onClick, currentUser, showing}){
 
 const moderators =["Alexander White", "Stephanie Kish", "Simon Hale", "Logan Parish", "Kyle Shumaker", "Seth McBee"]
 const [event, setEvent] = useState({
@@ -26,7 +27,7 @@ try {
  console.log(err)
 }};
 
-const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(false);
 
 useEffect(() => {
   if (modal) {
@@ -58,20 +59,30 @@ const handleEditClick = () => {
  
   return(
     <>
-
       <div id="eventPopup" className="eventModal">
-      	<div className="closeEvent" onClick={onClick}>&times;</div>
+        <div className="closeEvent" onClick={onClick}>
+          &times;
+        </div>
         <div className="eventContent">
           <div className="eventHeader">
-            <h1>
-              {ev.title}
-            </h1>
+            <h1>{ev.title}</h1>
           </div>
           <div className="eventBody">
             <h3> {ev.address}</h3>
             <h5> Attendees: {ev.rsvp}</h5>
             <p> {ev.description}</p>
-            <p> {new Date(ev.start).toLocaleString()} - {new Date(ev.end).toLocaleString()} </p>
+            <p>
+              {new Date(ev.start).toLocaleString()} -{" "}
+              {new Date(ev.end).toLocaleString()}{" "}
+              <div height="300px">
+                {!showing && <Map
+                  height={"400px"}
+                  width={"400px"}
+                  lat={ev.lat}
+                  lon={ev.lon}
+                />}{" "}
+              </div>
+            </p>
           </div>
 					<div className="buttons">
             <button id="rsvpButton" className="rsvp" onClick={handleRSVP}>RSVP</button>
@@ -83,7 +94,5 @@ const handleEditClick = () => {
         <UpdateEvent ev={ev} onClick={handleEditClick}/>
       </div>
     </>
-  )
+  );
 }
-
-

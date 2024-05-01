@@ -21,6 +21,7 @@
 .suggestion {
     padding: 1%
 }
+
 .suggestion:hover {
     background-color: lightgrey;
     color: black;
