@@ -71,6 +71,7 @@ const handleEditClick = () => {
             <h3> {ev.address}</h3>
             <h5> Attendees: {ev.rsvp}</h5>
             <p> {ev.description}</p>
+            <p><a href={`mailto:${ev.poster}`}>Message Host</a></p>
             <p>
               {new Date(ev.start).toLocaleString()} -{" "}
               {new Date(ev.end).toLocaleString()}{" "}
