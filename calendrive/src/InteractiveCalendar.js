@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import axios from "axios";
 import { GetEvent } from "./event_files/UserEvent.js";
 import "./event_files/UserEvent.css";
 import "./event_files/AddEvent.css";
@@ -31,25 +30,7 @@ const InteractiveCalendar = () => {
    * Handles fetching list of events from backend
    */
   const fetchEvents = async () => {
-    try {
-      const response = await axios.get("http://localhost:8800/events");
-
-      const formattedEvents = response.data.map((event) => ({
-        id: event.id,
-        title: event.name,
-        description: event.desc,
-        address: event.address,
-        lat: event.lat,
-        lon: event.lon,
-        start: new Date(event.start),
-        end: new Date(event.end),
-        poster: event.poster,
-        rsvp: event.rsvp,
-      }));
-      setEvents(formattedEvents);
-    } catch (error) {
-      console.error("Error fetching events:", error);
-    }
+    setEvents(await Backend.GetEvents());
   };
 
   const [modal, setModal] = useState(false);
