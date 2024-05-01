@@ -41,7 +41,8 @@ const InteractiveCalendar = () => {
                 lon: event.lon,
                 start: new Date(event.start),
                 end: new Date(event.end),
-                poster: event.poster
+                poster: event.poster,
+                rsvp: event.rsvp
             }));
             setEvents(formattedEvents);
         } catch (error) {

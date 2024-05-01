@@ -11,8 +11,12 @@ const [event, setevent] = useState({
     name: "",
     desc: "",
     address: "",
+    lat: 0,
+    lon: 0,
     start: "",
-    end: ""
+    end: "",
+    poster: ev.poster,
+    rsvp: ev.rsvp
 });
 
 const handleChange = (e) => {

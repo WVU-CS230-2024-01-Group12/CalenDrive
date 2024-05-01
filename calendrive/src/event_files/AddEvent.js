@@ -14,7 +14,8 @@ export function AddEvent({ currentUser, onClick }) {
     lon: 0,
     start: "",
     end: "",
-    poster: ""
+    poster: "",
+    rsvp: 0,
   });
 
   const handleChange = (e) => {
@@ -25,6 +26,7 @@ export function AddEvent({ currentUser, onClick }) {
     e.preventDefault();
     try {
       await axios.post("http://localhost:8800/events", event);
+      window.location.reload();
     } catch (err) {
       return err;
     }
