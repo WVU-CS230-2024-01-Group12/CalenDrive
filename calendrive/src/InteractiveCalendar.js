@@ -15,7 +15,8 @@ const localizer = momentLocalizer(moment);
 const InteractiveCalendar = () => {
 
     const [user, setUser] = useState({
-      name: ''
+      name: '',
+      email: ''
     })
     const [events, setEvents] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState({
@@ -106,7 +107,7 @@ const InteractiveCalendar = () => {
           />
           
           <GetEvent ev={selectedEvent} currentUser={user} onClick={handleEventClick} showing={modal}/>
-          <AddEvent onClick={handleAddEventClick}/>
+          <AddEvent currentUser={user} onClick={handleAddEventClick}/>
         </div>
     );
 };

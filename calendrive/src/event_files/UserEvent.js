@@ -6,7 +6,7 @@ import Map from '../Pages/Map';
 
 export function GetEvent({ev, onClick, currentUser, showing}){
 
-const moderators =["Alexander White", "Stephanie Kish", "Simon Hale", "Logan Parish", "Kyle Shumaker", "Seth McBee"]
+const moderators =["agw00027@mix.wvu.edu", "sak00009@mix.wvu.edu", "sjh00028@mix.wvu.edu", "lap00020@mix.wvu.edu"]
 const [event, setEvent] = useState({
   name: ev.title,
   desc: ev.description,
@@ -75,20 +75,21 @@ const handleEditClick = () => {
               {new Date(ev.start).toLocaleString()} -{" "}
               {new Date(ev.end).toLocaleString()}{" "}
               <div height="300px">
-                {!showing && <Map
+                <Map
                   height={"400px"}
                   width={"400px"}
                   lat={ev.lat}
                   lon={ev.lon}
-                />}{" "}
+                  show={showing}
+                />{" "}
               </div>
             </p>
           </div>
 					<div className="buttons">
             <button id="rsvpButton" className="rsvp" onClick={handleRSVP}>RSVP</button>
-            {(ev.poster === currentUser.name || moderators.includes(currentUser.name)) && <button id="editButton" className="edit" onClick={handleEditClick}>Edit</button>}
-            {(ev.poster === currentUser.name || moderators.includes(currentUser.name)) && <UpdateEvent onClick={handleEditClick} ev={ev}/>}
-            {(ev.poster === currentUser.name || moderators.includes(currentUser.name)) && <button id="deleteButton" className="delete" onClick={()=>handleDelete(ev.id)}>Delete</button>}
+            {(ev.poster === currentUser.email || moderators.includes(currentUser.email)) && <button id="editButton" className="edit" onClick={handleEditClick}>Edit</button>}
+            {(ev.poster === currentUser.email || moderators.includes(currentUser.email)) && <UpdateEvent onClick={handleEditClick} ev={ev}/>}
+            {(ev.poster === currentUser.email || moderators.includes(currentUser.email)) && <button id="deleteButton" className="delete" onClick={()=>handleDelete(ev.id)}>Delete</button>}
           </div>
         </div>
         <UpdateEvent ev={ev} onClick={handleEditClick}/>
