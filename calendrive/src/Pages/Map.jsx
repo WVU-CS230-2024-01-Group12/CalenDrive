@@ -1,14 +1,10 @@
 import { Marker, MapContainer, TileLayer, useMap } from "react-leaflet";
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "leaflet/dist/leaflet.css";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
 
-function Map({ height, width, lat, lon }) {
-  /**
-   * Handles changing the view of the map by the user by scrolling or zooming
-   * @param {view} view view to update the map display to
-   */
+function Map({ height, width, lat, lon, show }) {
   function ChangeView({ center, zoom }) {
     const map = useMap();
     map.setView(center, zoom);
@@ -23,8 +19,16 @@ function Map({ height, width, lat, lon }) {
     lon = 0;
   }
 
+  const [mapVisible, setMapVisible] = useState(false);
+
+  useEffect(() => {
+    setMapVisible(show);
+  }, [show]);
+
+  if(!mapVisible) return null;
+
   return (
-    <div>
+    <div height={height} width={width}>
       <MapContainer center={[lat, lon]} zoom={16} style={{ height, width }}>
         <ChangeView center={[lat, lon]} zoom={16} />
         <TileLayer

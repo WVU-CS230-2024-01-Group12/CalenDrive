@@ -23,7 +23,7 @@ export function AddEvent({ currentUser, onClick }) {
    */
   const handleChange = (e) => {
     setEvent((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    setEvent((prev) => ({ ...prev, poster: currentUser.name }));
+    setEvent((prev) => ({...prev, poster: currentUser.email}))
   };
 
   /**

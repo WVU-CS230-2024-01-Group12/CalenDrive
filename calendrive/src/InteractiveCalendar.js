@@ -12,15 +12,18 @@ import Backend from "./Backend.js";
 const localizer = momentLocalizer(moment);
 
 const InteractiveCalendar = () => {
-  const [user, setUser] = useState({
-    name: "",
-  });
-  const [events, setEvents] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState({
-    title: "",
-    start: new Date(),
-    end: new Date(),
-  });
+
+    const [user, setUser] = useState({
+      name: '',
+      email: ''
+    })
+    const [events, setEvents] = useState([]);
+    const [selectedEvent, setSelectedEvent] = useState({
+      title: '',
+      start: new Date(),
+      end: new Date(),
+    });
+
 
   useEffect(() => {
     fetchEvents();
@@ -103,15 +106,21 @@ const InteractiveCalendar = () => {
         style={{ padding: "10px" }}
       />
 
-      <GetEvent
-        ev={selectedEvent}
-        currentUser={user}
-        onClick={handleEventClick}
-        showing={modal}
-      />
-      <AddEvent onClick={handleAddEventClick} />
-    </div>
-  );
-};
+    return (
+        <div className='full-screen-calendar'>
+          <button id="AddEventButton" onClick={handleAddEventClick}>Add Event</button>
+          <Calendar
+              localizer={localizer}
+              events={events}
+              startAccessor="start"
+              endAccessor="end"
+              onSelectEvent={handleEventClick}
+              style={{ padding: '10px' }}
+          />
+          
+          <GetEvent ev={selectedEvent} currentUser={user} onClick={handleEventClick} showing={modal}/>
+          <AddEvent currentUser={user} onClick={handleAddEventClick}/>
+        </div>
+    );
 
 export default InteractiveCalendar;
