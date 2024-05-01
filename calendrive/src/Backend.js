@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const Backend = {};
 const BACKEND_BASE = "http://localhost:8800";
@@ -6,47 +6,61 @@ const BACKEND_BASE = "http://localhost:8800";
 // Required for our session cookie to be sent with every request
 axios.defaults.withCredentials = true;
 
-Backend.RedirectToAuthenticationUrl = function() {
-    const authenticationUrl = new URL("/authenticate_url", BACKEND_BASE);
+Backend.RedirectToAuthenticationUrl = function () {
+  const authenticationUrl = new URL("/authenticate_url", BACKEND_BASE);
 
-    window.location.assign(authenticationUrl);
-}
+  window.location.assign(authenticationUrl);
+};
 
-Backend.Logout = async function() {
-    await axios.get(BACKEND_BASE + "/logout");
-    sessionStorage.removeItem("account_info");
-    window.location.reload();
-}
+/**
+ * Handles logging out the user from the website
+ */
+Backend.Logout = async function () {
+  await axios.get(BACKEND_BASE + "/logout");
+  sessionStorage.removeItem("account_info");
+  window.location.reload();
+};
 
-Backend.OAuth2Callback = function(authCode, navigate) {
-    const authCodeEncoded = encodeURIComponent(authCode);
-    const callback = axios.post(BACKEND_BASE + "/oauth2callback/" + authCodeEncoded);
+/**
+ * Handles OAuth callback after authentication
+ * @param {*} authCode User's authentication code recieved from OAuth
+ * @param {*} navigate Function to navigate to main page
+ */
+Backend.OAuth2Callback = function (authCode, navigate) {
+  const authCodeEncoded = encodeURIComponent(authCode);
+  const callback = axios.post(
+    BACKEND_BASE + "/oauth2callback/" + authCodeEncoded
+  );
 
-    callback.then(async result => {
-        const successResult = result.data.result;
+  callback.then(async (result) => {
+    const successResult = result.data.result;
 
-        if (successResult !== "Success") {
-            console.log(successResult);
-            alert("Failed to login");
-        } else {
-            let response = await axios.get(BACKEND_BASE + "/account_info");
-            let accountInfo = response.data;
+    if (successResult !== "Success") {
+      console.log(successResult);
+      alert("Failed to login");
+    } else {
+      let response = await axios.get(BACKEND_BASE + "/account_info");
+      let accountInfo = response.data;
 
-            if (accountInfo.result !== "Success") {
-                sessionStorage.removeItem("account_info");
-                return;
-            }
+      if (accountInfo.result !== "Success") {
+        sessionStorage.removeItem("account_info");
+        return;
+      }
 
-            sessionStorage.setItem("account_info", JSON.stringify(accountInfo));
-        }
+      sessionStorage.setItem("account_info", JSON.stringify(accountInfo));
+    }
 
-        // Back to the main page
-        navigate("/");
-    });
-}
+    // Back to the main page
+    navigate("/");
+  });
+};
 
-Backend.GetAccountInfo = function() {
-    return JSON.parse(sessionStorage.getItem("account_info"));
-}
+/**
+ * Gets account information from session storage
+ * @returns JSON of account info
+ */
+Backend.GetAccountInfo = function () {
+  return JSON.parse(sessionStorage.getItem("account_info"));
+};
 
 export default Backend;

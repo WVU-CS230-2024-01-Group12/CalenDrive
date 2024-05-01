@@ -5,12 +5,19 @@ import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
 
 function Map({ height, width, lat, lon }) {
+  /**
+   * Handles changing the view of the map by the user by scrolling or zooming
+   * @param {view} view view to update the map display to
+   */
   function ChangeView({ center, zoom }) {
     const map = useMap();
     map.setView(center, zoom);
     return null;
   }
 
+  // If lat/lon don't exist, set both to zero
+  // This fixes a runtime error where the map display for no event is attempted to be displayed
+  // Previously caused invalid LatLon reference
   if (isNaN(lat) || isNaN(lon)) {
     lat = 0;
     lon = 0;
