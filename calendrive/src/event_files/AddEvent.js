@@ -5,7 +5,6 @@ import { useState } from "react";
 import AddressBar from "../address_autocomplete/AddressBar.js";
 
 export function AddEvent({ currentUser, onClick }) {
-
   const [event, setEvent] = useState({
     name: "",
     desc: "",
@@ -18,10 +17,20 @@ export function AddEvent({ currentUser, onClick }) {
     rsvp: 0,
   });
 
+  /**
+   * Handles changes in input fields
+   * @param {Event} e Event to update form data for
+   */
   const handleChange = (e) => {
     setEvent((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     setEvent((prev) => ({...prev, poster: currentUser.email}))
   };
+
+  /**
+   * Handless submitting form data of new event to server
+   * @param {Event} e  Event to upload to server
+   * @returns err if submitting event to server fails
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

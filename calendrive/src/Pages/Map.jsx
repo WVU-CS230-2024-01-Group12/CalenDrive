@@ -11,6 +11,9 @@ function Map({ height, width, lat, lon, show }) {
     return null;
   }
 
+  // If lat/lon don't exist, set both to zero
+  // This fixes a runtime error where the map display for no event is attempted to be displayed
+  // Previously caused invalid LatLon reference
   if (isNaN(lat) || isNaN(lon)) {
     lat = 0;
     lon = 0;

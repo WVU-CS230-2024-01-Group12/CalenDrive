@@ -48,3 +48,7 @@ html,body {
     transform: rotate(360deg);
   }
 }
+
+#userEventsList {
+  list-style-type: none;
+}
