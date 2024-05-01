@@ -1,6 +1,6 @@
 # Calendrive
 
-![Calendrive Logo](calendrive\public\calendriveLogo.png)
+![Calendrive Logo](https://github.com/WVU-CS230-2024-01-Group12/CalenDrive/tree/master/src/public/calendrivelogo.png)
 
 Calendrive is a website that allows users to share their own events with others. You can also RSVP to those events, so that others can see how many others are interested in those events.
 
@@ -10,7 +10,7 @@ In order to log in, users must sign in using their Google account, which will th
 
 ## Creating Events
 
-![Necessary Information](img\info-required.png)
+![Necessary Information](https://github.com/WVU-CS230-2024-01-Group12/CalenDrive/tree/master/img/info-required.png)
 
 Creating an event is as simple as clicking the `Add Event` button at the top of the screen, then filling in the necessary information and posting.
 
@@ -27,21 +27,21 @@ Events can be assigned a location using the search bar built into the `Post Even
 
 ## Viewing Events
 
-![Event in calendar](img\event.png)
+![Event in calendar](https://github.com/WVU-CS230-2024-01-Group12/CalenDrive/tree/master/img/event.png)
 
 To view an event, simply click on it within the calendar. This will open up the event information on the side, allowing you to view exactly when and where the event is, as well as a description of the event.
 
-![Event view](img\event-view.png)
+![Event view](https://github.com/WVU-CS230-2024-01-Group12/CalenDrive/tree/master/img/event-view.png)
 
 ## Search Bar
 
-![Search bar](img\search-bar.png)
+![Search bar](https://github.com/WVU-CS230-2024-01-Group12/CalenDrive/tree/master/img/search-bar.png)
 
 Users can also search for events, and using the search bar you can search by either the name, address, date, or time by clicking on the corresponding button next to the search bar.
 
 ## Navigation Bar
 
-![Navigation bar](img\nav-bar.png)
+![Navigation bar](https://github.com/WVU-CS230-2024-01-Group12/CalenDrive/tree/master/img/nav-bar.png)
 
 Within the navigation bar at the top of the screen, users can:
 
