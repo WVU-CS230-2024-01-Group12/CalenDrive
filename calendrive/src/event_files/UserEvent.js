@@ -96,7 +96,7 @@ export function GetEvent({ ev, onClick, currentUser, showing }) {
               {new Date(ev.end).toLocaleString()}{" "}
               <div height="300px">
                 <Map
-                  height={"400px"}
+                  height={"200px"}
                   width={"400px"}
                   lat={ev.lat}
                   lon={ev.lon}
