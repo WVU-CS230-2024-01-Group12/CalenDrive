@@ -63,4 +63,30 @@ Backend.GetAccountInfo = function () {
   return JSON.parse(sessionStorage.getItem("account_info"));
 };
 
+/**
+ * Gets the list of events on the calendar
+ * @returns Array of events returned from the backend
+ */
+Backend.GetEvents = async function () {
+  try {
+    const response = await axios.get(BACKEND_BASE + "/events");
+
+    return response.data.map((event) => ({
+      id: event.id,
+      title: event.name,
+      description: event.desc,
+      address: event.address,
+      lat: event.lat,
+      lon: event.lon,
+      start: new Date(event.start),
+      end: new Date(event.end),
+      poster: event.poster,
+      rsvp: event.rsvp,
+    }));
+  } catch (error) {
+    console.error("Error fetching events:", error);
+    return [];
+  }
+}
+
 export default Backend;
